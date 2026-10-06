@@ -3,9 +3,9 @@ namespace RestauranteConcorrente;
 sealed class Garcom
 {
     readonly Balcao _balcao;
-    readonly Action _aoEntregar;
+    readonly Action<Pedido> _aoEntregar;
 
-    public Garcom(Balcao balcao, Action aoEntregar)
+    public Garcom(Balcao balcao, Action<Pedido> aoEntregar)
     {
         _balcao = balcao;
         _aoEntregar = aoEntregar;
@@ -22,7 +22,7 @@ sealed class Garcom
             while (_balcao.TentarRetirar(out var pedido))
             {
                 Log.Escrever("Garçom", $"{pedido} entregue");
-                _aoEntregar();
+                _aoEntregar(pedido!);
             }
 
             if (_balcao.Encerrado && _balcao.Vazio)

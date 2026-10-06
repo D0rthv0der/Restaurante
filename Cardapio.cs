@@ -11,4 +11,13 @@ static class Cardapio
     ];
 
     public static Prato Aleatorio() => Pratos[Random.Shared.Next(Pratos.Count)];
+
+    public static IReadOnlyList<Prato> Sortear(int quantidade, int semente)
+    {
+        var aleatorio = new Random(semente);
+        var pedidos = new Prato[quantidade];
+        for (var i = 0; i < quantidade; i++)
+            pedidos[i] = Pratos[aleatorio.Next(Pratos.Count)];
+        return pedidos;
+    }
 }
